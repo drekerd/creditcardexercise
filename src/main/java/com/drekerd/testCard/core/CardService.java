@@ -1,9 +1,9 @@
 package com.drekerd.testCard.core;
 
 
-import com.drekerd.testCard.Infrastructure.externalRequests.BinListRequest;
-import com.drekerd.testCard.Infrastructure.dto.Card;
-import com.drekerd.testCard.Utils.ExceptionUtils.NotReadableCardNumberException;
+import com.drekerd.testCard.infrastructure.core.BinList;
+import com.drekerd.testCard.infrastructure.dto.Card;
+import com.drekerd.testCard.utils.exceptions.NotReadableCardNumberException;
 import com.drekerd.testCard.entrypoint.dto.CardControllerDTO;
 import com.drekerd.testCard.entrypoint.dto.ResponseWithCardInfo;
 import lombok.extern.log4j.Log4j2;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class CardService {
 
     @Autowired
-    BinListRequest binListRequest;
+    BinList binListRequest;
 
     public ResponseWithCardInfo validateCard(String cardNumber) {
         log.info(this.getClass().getName() + "Validate cards Enters with cards number: " + cardNumber);

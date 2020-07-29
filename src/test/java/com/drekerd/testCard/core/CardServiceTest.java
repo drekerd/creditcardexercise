@@ -1,8 +1,8 @@
 package com.drekerd.testCard.core;
 
-import com.drekerd.testCard.Infrastructure.dto.Card;
-import com.drekerd.testCard.Infrastructure.externalRequests.BinListRequest;
-import com.drekerd.testCard.Utils.ExceptionUtils.NotReadableCardNumberException;
+import com.drekerd.testCard.infrastructure.dto.Card;
+import com.drekerd.testCard.infrastructure.core.BinList;
+import com.drekerd.testCard.utils.exceptions.NotReadableCardNumberException;
 import com.drekerd.testCard.entrypoint.dto.ResponseWithCardInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class CardServiceTest {
 
     @Mock
-    BinListRequest binListRequest;
+    BinList binList;
 
     @InjectMocks
     CardService cardService = new CardService();
@@ -34,7 +34,7 @@ public class CardServiceTest {
 
     @Test
     public void testCard(){
-        when(binListRequest.getCardInfoByCardNumber(any()))
+        when(binList.getCardInfoByCardNumber(any()))
                 .thenReturn(card);
         ResponseWithCardInfo responseWithCardInfo = cardService.validateCard("123456789");
         assertEquals(responseWithCardInfo.getPayload().getScheme(), "Visa");
