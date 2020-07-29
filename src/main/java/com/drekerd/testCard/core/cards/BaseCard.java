@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BaseCard {
-    protected String scheme;
-    protected String type;
-    protected String bank;
+    public String scheme;
+    public String type;
+    public String bank;
 }

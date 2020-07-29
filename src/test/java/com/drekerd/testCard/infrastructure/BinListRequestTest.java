@@ -67,7 +67,7 @@ public class BinListRequestTest {
     }
 
     @Test
-    public void testResponse() throws IOException {
+    public void testResponse(){
         Gson gson = new Gson();
 
         CardResponse newCard = createNewCard();
@@ -88,7 +88,228 @@ public class BinListRequestTest {
     }
 
     @Test
-    public void testResponseLimit() throws IOException {
+    public void testResponse_BankName_Empty(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.getBank().setName("");
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals(newCard.getScheme(), card.getScheme());
+        assertEquals("No Info for this cards", card.getBank());
+        assertEquals(newCard.getType(), card.getType());
+    }
+
+    @Test
+    public void testResponse_BankName_Null(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.getBank().setName(null);
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals(newCard.getScheme(), card.getScheme());
+        assertEquals("No Info for this cards", card.getBank());
+        assertEquals(newCard.getType(), card.getType());
+    }
+
+    @Test
+    public void testResponse_BankName_Blank(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.getBank().setName(" ");
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals(newCard.getScheme(), card.getScheme());
+        assertEquals("No Info for this cards", card.getBank());
+        assertEquals(newCard.getType(), card.getType());
+    }
+
+    @Test
+    public void testResponse_Scheme_Empty(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.setScheme("");
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals("No Info for this cards", card.getScheme());
+        assertEquals(newCard.getBank().getName(), card.getBank());
+        assertEquals(newCard.getType(), card.getType());
+    }
+
+    @Test
+    public void testResponse_Scheme_Null(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.setScheme(null);
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals("No Info for this cards", card.getScheme());
+        assertEquals(newCard.getBank().getName(), card.getBank());
+        assertEquals(newCard.getType(), card.getType());
+    }
+
+    @Test
+    public void testResponse_Scheme_Blank(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.setScheme(" ");
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals("No Info for this cards", card.getScheme());
+        assertEquals(newCard.getBank().getName(), card.getBank());
+        assertEquals(newCard.getType(), card.getType());
+    }
+
+    @Test
+    public void testResponse_Type_Empty(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.setType("");
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals(newCard.getScheme(), card.getScheme());
+        assertEquals(newCard.getBank().getName(), card.getBank());
+        assertEquals("No Info for this cards", card.getType());
+    }
+
+    @Test
+    public void testResponse_Type_Null(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.setType(null);
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals(newCard.getScheme(), card.getScheme());
+        assertEquals(newCard.getBank().getName(), card.getBank());
+        assertEquals("No Info for this cards", card.getType());
+    }
+
+    @Test
+    public void testResponse_Type_Blank(){
+        Gson gson = new Gson();
+
+        CardResponse newCard = createNewCard();
+        newCard.setType(" ");
+
+        String jsonInString = gson.toJson(newCard);
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_OK);
+        when(mockedResponse.getEntity()).thenReturn(EntityBuilder.create().setText(jsonInString).build());
+
+        Card card = binList.getCardInfoByCardNumber("121323123123");
+
+        assertEquals(newCard.getScheme(), card.getScheme());
+        assertEquals(newCard.getBank().getName(), card.getBank());
+        assertEquals("No Info for this cards", card.getType());
+    }
+
+    @Test
+    public void testResponseLimit(){
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(249);
+
+        assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Limit of requests exceeded, you can only do 10 requests per minute");
+    }
+
+    @Test
+    public void testBadRequest(){
         HttpResponse mockedResponse = mock(HttpResponse.class);
         StatusLine statusLine = mock(StatusLine.class);
 
@@ -98,6 +319,78 @@ public class BinListRequestTest {
 
         assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("Limit of requests exceeded, you can only do 10 requests per minute");
+                .hasMessage("Something with your request went wrong");
+    }
+
+    @Test
+    public void testUnauthorized(){
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_UNAUTHORIZED);
+
+        assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Incorrectly Authenticated");
+    }
+
+    @Test
+    public void testForbidden(){
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_FORBIDDEN);
+
+        assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("You have no permissions to this information");
+    }
+
+    @Test
+    public void testNotFound(){
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_NOT_FOUND);
+
+        assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("The url you entered does not exist, check with your admin");
+    }
+
+    @Test
+    public void testInternalServerError(){
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+        when(statusLine.getReasonPhrase()).thenReturn("Error");
+
+        assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Some undefined error has occurred, please check with your admin. Error");
+    }
+
+    @Test
+    public void testUndefinedError(){
+        HttpResponse mockedResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+
+        when(binListRequest.doGetRequest(anyString())).thenReturn(mockedResponse);
+        when(mockedResponse.getStatusLine()).thenReturn(statusLine);
+        when(statusLine.getStatusCode()).thenReturn(HttpStatus.SC_GATEWAY_TIMEOUT);
+        when(statusLine.getReasonPhrase()).thenReturn("Error");
+
+        assertThatThrownBy(() -> binList.getCardInfoByCardNumber("121323123123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Some undefined error has occurred, please check with your admin. Error");
     }
 }

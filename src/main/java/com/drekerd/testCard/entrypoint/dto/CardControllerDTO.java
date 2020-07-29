@@ -14,17 +14,17 @@ public class CardControllerDTO extends BaseCard {
         private String type;
         private String bank;
 
-        public Builder withScheme(String scehme) {
+        public Builder withScheme(final String scehme) {
             this.scheme = scehme;
             return this;
         }
 
-        public Builder withType(String type) {
+        public Builder withType(final String type) {
             this.type = type;
             return this;
         }
 
-        public Builder withBank(String bank) {
+        public Builder withBank(final String bank) {
             this.bank = bank;
             return this;
         }

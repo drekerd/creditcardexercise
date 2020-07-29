@@ -19,7 +19,7 @@ public class ValidateCardController {
     CardService cardService;
 
     @GetMapping("/verify/{cardNumber}")
-    public ResponseEntity<Object> validateCard(@PathVariable String cardNumber) {
+    public ResponseEntity<Object> validateCard(@PathVariable final String cardNumber) {
         log.info(this.getClass().getName() + " validateCard ENTER: with cards number: " + cardNumber);
         return new ResponseEntity<>(cardService.validateCard(cardNumber), HttpStatus.OK);
     }

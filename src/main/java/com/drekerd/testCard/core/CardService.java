@@ -17,36 +17,35 @@ public class CardService {
     @Autowired
     BinList binListRequest;
 
-    public ResponseWithCardInfo validateCard(String cardNumber) {
+    public ResponseWithCardInfo validateCard(final String cardNumber) {
         log.info(this.getClass().getName() + "Validate cards Enters with cards number: " + cardNumber);
         cardNumberBasicvaildations(cardNumber);
         return createOkResponse(binListRequest.getCardInfoByCardNumber(cardNumber));
     }
 
-    private void cardNumberBasicvaildations(String cardNumber) {
+    private void cardNumberBasicvaildations(final String cardNumber) {
         validateCardNumberIsNotNull(cardNumber);
         validateNotNumeric(cardNumber);
     }
 
-    private void validateNotNumeric(String cardNumber) {
+    private void validateNotNumeric(final String cardNumber) {
         if (!(cardNumber.matches("[0-9]+") && cardNumber.length() > 2)) {
             throw new NotReadableCardNumberException("The cards number must contain only numbers");
         }
     }
 
-    private ResponseWithCardInfo createOkResponse(Card card) {
+    private ResponseWithCardInfo createOkResponse(final Card card) {
         log.info(this.getClass().getName() + "createOkResponse with cards: " + card.toString());
-        CardControllerDTO cardControllerDTO = new CardControllerDTO.Builder()
+        final CardControllerDTO cardControllerDTO = new CardControllerDTO.Builder()
                 .withScheme(card.getScheme())
                 .withType(card.getType())
                 .withBank(card.getBank())
                 .build();
-        ResponseWithCardInfo response = new ResponseWithCardInfo();
+        final ResponseWithCardInfo response = new ResponseWithCardInfo();
         response.setPayload(cardControllerDTO);
         response.setSucess(true);
 
         return response;
-
     }
 
     private void validateCardNumberIsNotNull(String cardNumber) {

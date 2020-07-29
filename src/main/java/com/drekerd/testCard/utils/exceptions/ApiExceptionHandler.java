@@ -31,6 +31,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
 
+    @ExceptionHandler(BinlistRequestsExceededException.class)
+    protected ResponseEntity<Object> handleBinlistRequestsExceeded(BinlistRequestsExceededException ex) {
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
+        apiError.setMessage(ex.getMessage());
+
+        return new ResponseEntity<>(apiError, apiError.getStatus());
+    }
+
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }

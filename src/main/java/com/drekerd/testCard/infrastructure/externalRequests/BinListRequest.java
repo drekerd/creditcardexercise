@@ -15,8 +15,8 @@ public class BinListRequest {
 
     public HttpResponse doGetRequest(final String URL){
         log.info( "BinListRequest.doGetRequest, Start Request to " + URL);
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet getRequest = new HttpGet(URL);
+        final CloseableHttpClient httpClient = HttpClients.createDefault();
+        final HttpGet getRequest = new HttpGet(URL);
         try {
            return httpClient.execute(getRequest);
         } catch (IOException e) {

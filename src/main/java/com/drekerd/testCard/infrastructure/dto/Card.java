@@ -13,30 +13,28 @@ public class Card extends BaseCard {
         private String type;
         private String bank;
 
-        public Card.Builder withScheme(String scheme) {
-            this.scheme = (scheme == null) ? "No Info for this cards" : scheme;
+        public Card.Builder withScheme(final String scheme) {
+            this.scheme = (scheme == null || scheme.isEmpty() || scheme.isBlank()) ? "No Info for this cards" : scheme;
             return this;
         }
 
-        public Card.Builder withType(String type) {
-            this.type = (type == null) ? "No Info for this cards" : type;
+        public Card.Builder withType(final String type) {
+            this.type = (type == null || type.isEmpty() || type.isBlank()) ? "No Info for this cards" : type;
             return this;
         }
 
-        public Card.Builder withBank(String bank) {
-            this.bank = (bank == null) ? "No Info for this cards" : bank;
+        public Card.Builder withBank(final String bank) {
+            this.bank = (bank == null || bank.isEmpty() || bank.isBlank()) ? "No Info for this cards" : bank;
             return this;
         }
 
         public Card build() {
             Card card = new Card();
-
             card.scheme = this.scheme;
             card.type = this.type;
             card.bank = this.bank;
             return card;
         }
-
     }
 
     private Card() {
